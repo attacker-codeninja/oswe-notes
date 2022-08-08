@@ -8,9 +8,16 @@ Time for OSWE I guess.
 
 ## Tools
 
+#### General
+
 - [x] [CyberChef](https://gchq.github.io/CyberChef/) A web app for encryption, encoding, compression and data analysis
 - [x] [JSNICE](http://jsnice.org/) A JavaScript Deobfuscation tool
 - [x] [boxentriq/code-breaking](https://www.boxentriq.com/code-breaking) Various codebreaking and cipher tools
+
+#### Decompilers
+
+- [x] [dnSPY](https://github.com/dnSpy/dnSpy) - .NET decompiler
+- [x] [JD-GUI](http://java-decompiler.github.io/) - Java decompiler
 
 ## Source Code Review Methdologies
 S. No| Approach|
@@ -34,20 +41,26 @@ References:
 
 <details><summary>MySQL/MariaDB</summary>
 <p>
-Modify the following values on my.cnf file(Typically located at /etc/mysql/my.cnf)</br>
 
-    ```
+Modify the following values on my.cnf file (Typically located at /etc/mysql/my.cnf)</br>
+
+```
      [mysqld]
      general_log_file = /var/log/mysql/mariadb.log
      general_log = 1
-    ```
-*In case of mariadb the settings will be present under `[mariadb]`</br>
-Restart the mysql service for the change to take affect</br>
-You can read the log file in realtime using `sudo tail -f /var/log/mysql/mysql.log`
+```
+- In case of MariaDB, the settings will be present under `[mariadb]`
+- Restart the SQL service for the change to take affect
+- You can read the log file in realtime using `sudo tail -f /var/log/mysql/mysql.log`
 </p>
 </details>
 
-- Postgres: https://tableplus.com/blog/2018/10/how-to-show-queries-log-in-postgresql.html
+<details><summary>PostgreSQL</summary>
+<p>
+
+- https://tableplus.com/blog/2018/10/how-to-show-queries-log-in-postgresql.html
+</p>
+</details>
 
 ## Enable Remote Debugging
 - Java: https://stackify.com/java-remote-debugging/
