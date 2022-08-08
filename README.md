@@ -19,7 +19,7 @@ Time for OSWE I guess.
 - [x] [dnSPY](https://github.com/dnSpy/dnSpy) - .NET decompiler
 - [x] [JD-GUI](http://java-decompiler.github.io/) - Java decompiler
 
-## Source Code Review Methdologies
+## Source Code Analysis Methdology
 S. No| Approach|
 |     :---:      |     :---:      |
 |1|String matching/Grep for bugs |
@@ -27,6 +27,15 @@ S. No| Approach|
 |3|Reading source code randomly|
 |4|Read all the code|
 |5|Check one functionality at a time (login, password reset...)|
+
+#### Source vs. Sink
+
+- A 'source' is the code that allows a vulnerability to happen, whereas a 'sink' is where the vulnerability actually happens.
+- E.g. when submitting a POST request to login to an application, the controller code that handles this POST request is a source. The code may run some input validation on the username and password and then execute a database query with those values. The call to the database to execute the query is the sink in this scenario.
+
+#### Top down vs. Bottom up
+
+TODO
 
 ## Dangerous Functions
 
@@ -67,7 +76,7 @@ Modify the following values on my.cnf file (Typically located at /etc/mysql/my.c
 - Java: https://stackoverflow.com/questions/975271/remote-debugging-a-java-application
 - Java, PHP, NodeJs: [Requires access to offsec forums] https://forums.offensive-security.com/showthread.php?37965-Visual-Studio-Code-debugging&p=172805
 
-## OSWE: Possible vulnerabilities that might show up in exam based on the syllabus
+## Possible vulnerabilities that might show up in exam based on the syllabus
 |Auth Bypass	| RCE|
 |     :---:      |     :---:      |
 |SQL Injection - [Payloads](https://portswigger.net/web-security/sql-injection/cheat-sheet)| Deserialization|
