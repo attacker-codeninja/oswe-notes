@@ -35,7 +35,10 @@ S. No| Approach|
 
 #### Top down vs. Bottom up
 
-TODO
+- In a bottom up approach, you start with sinks. Identify if any sinks contain vulnerabilities and what variables/values the vulnerable sink code uses. Then trace the sink and determine which sources call it and what user input can be abused.
+- In a top down approach, you start with sources. Trace the application flows to their respective sinks and attempt to identify any sensitive functionality.
+- Be mindful of filters and input sanitisation that might affect your payload.
+- A bottom up approach is more likely to result in higher-severity vulnerabilities with a lower likelihood of exposure e.g. RCE. A top down approach, however, is likely to uncover lower-severity vulnerabilities with a higher likelihood of exposure e.g. XSS.
 
 ## Dangerous Functions
 
