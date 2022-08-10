@@ -151,9 +151,8 @@ Weak random token generator	| XXE - [Payloads](https://github.com/payloadbox/xxe
     - [x] DOM based XSS: Grep for sinks. REF: https://domgo.at/cxss/sinks 
     - [x] Weak random token generator: `java.util.random` is vulnerable
 
-## OSWE Like Machines
-- https://www.vulnhub.com/entry/securecode-1,651/
-- https://github.com/bmdyy
+## OSWE-like Machines
+- https://docs.google.com/spreadsheets/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/edit#gid=665299979
 
 ## Skeleton Scripts
 |Purpose|File|
