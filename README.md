@@ -39,9 +39,9 @@ Time for OSWE I guess.
 </details>
 
 ## Source Code Analysis Methdology
-|S. No| Approach|
-|     :---:      |     :---:      |
-|1|String matching/Grep for bugs |
+|S. No|Approach|
+|---|---|
+|1|String matching/Grep for bugs|
 |2|Following user input|
 |3|Reading source code randomly|
 |4|Read all the code|
@@ -100,7 +100,7 @@ Modify the following values on my.cnf file (Typically located at /etc/mysql/my.c
 
 ## Possible vulnerabilities that might show up in exam based on the syllabus
 |Auth Bypass|RCE|
-|     :---:      |     :---:      |
+|---|---|
 |SQL Injection - [Payloads](https://portswigger.net/web-security/sql-injection/cheat-sheet)| Deserialization|
 |Persistent Cross-Site Scripting	| Bypassing File Upload Restrictions|
 IDOR	|SQL Injection RCE (Postgres UDF or Mysql copy to function)|
@@ -113,7 +113,7 @@ Weak random token generator	| XXE - [Payloads](https://github.com/payloadbox/xxe
 
 ## Vulnerable Code Examples
 |Language - PHP|
-|     :---:    |
+|---|
 |[XSS](/Vulnerable%20Code%20Examples/php/xss.php)|
 |[LFI](/Vulnerable%20Code%20Examples/php/lfi.php)|
 |[SSRF](/Vulnerable%20Code%20Examples/php/ssrf.php)|
@@ -122,7 +122,7 @@ Weak random token generator	| XXE - [Payloads](https://github.com/payloadbox/xxe
 |[SQL Injection - Error](/Vulnerable%20Code%20Examples/php/sqlinjection/error.php)|
 
 ## Code Review Checklist
-- [x] Identify Tech Stack: 
+- [x] Identify the technology stack: 
     - [x] Programming language? What version, i.e., PHP 5 or 7? Are there programming language-specific vulnerabilities to look out for?
     - [x] Database? 
     - [x] Framework?
@@ -157,7 +157,7 @@ Weak random token generator	| XXE - [Payloads](https://github.com/payloadbox/xxe
 
 ## Skeleton Scripts
 |Purpose|File|
-|     :---:      |     :---:      |
+|---|---|
 |Basic skeleton script which makes an HTTP request in python|[main.py](/Skeleton%20Scripts/main.py)|
 | Run shell command and capture the output|[system_level_commands.py](/Skeleton%20Scripts/system_level_commands.py)| 
 | Run Java from within Python|[run_java_from_python.py](/Skeleton%20Scripts/run_java_from_python.py)| 
