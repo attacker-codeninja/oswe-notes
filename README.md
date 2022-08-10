@@ -4,6 +4,10 @@ Time for OSWE I guess.
 
 * **07/08/2022**: Journey begins
 
+# Cheat Sheets
+
+[Fundamentals](#fundamentals)
+
 # Fundamentals
 
 ## Tools
@@ -19,8 +23,23 @@ Time for OSWE I guess.
 - [x] [dnSPY](https://github.com/dnSpy/dnSpy) - .NET decompiler
 - [x] [JD-GUI](http://java-decompiler.github.io/) - Java decompiler
 
+## Debuggers
+
+<details><summary>Debugging Context Controls</summary>
+<p>
+
+- Continue: Application will resume execution until it completes or hits another breakpoint.
+- Step Over: Allows the next method call to execute and will pause execution at the next line in the current method.
+- Step Into: Step Into steps into the most deeply nested function. For example, if you use Step Into on a call like Func1(Func2()), the debugger steps into the function Func2.
+- Step Out: Continues running code and suspends execution when the current function returns. The debugger skips through the current function.
+- Restart: 
+- Stop: 
+- Hot Code Replace: Allows us to modify the source file and push changes to the executing process.
+</p>
+</details>
+
 ## Source Code Analysis Methdology
-S. No| Approach|
+|S. No| Approach|
 |     :---:      |     :---:      |
 |1|String matching/Grep for bugs |
 |2|Following user input|
@@ -80,7 +99,7 @@ Modify the following values on my.cnf file (Typically located at /etc/mysql/my.c
 - Java, PHP, NodeJs: [Requires access to offsec forums] https://forums.offensive-security.com/showthread.php?37965-Visual-Studio-Code-debugging&p=172805
 
 ## Possible vulnerabilities that might show up in exam based on the syllabus
-|Auth Bypass	| RCE|
+|Auth Bypass|RCE|
 |     :---:      |     :---:      |
 |SQL Injection - [Payloads](https://portswigger.net/web-security/sql-injection/cheat-sheet)| Deserialization|
 |Persistent Cross-Site Scripting	| Bypassing File Upload Restrictions|
@@ -93,8 +112,8 @@ Weak random token generator	| XXE - [Payloads](https://github.com/payloadbox/xxe
 | - |	OS Command Injection|
 
 ## Vulnerable Code Examples
-| Language - PHP|
-|     :---:      |
+|Language - PHP|
+|     :---:    |
 |[XSS](/Vulnerable%20Code%20Examples/php/xss.php)|
 |[LFI](/Vulnerable%20Code%20Examples/php/lfi.php)|
 |[SSRF](/Vulnerable%20Code%20Examples/php/ssrf.php)|
@@ -137,7 +156,7 @@ Weak random token generator	| XXE - [Payloads](https://github.com/payloadbox/xxe
 - https://github.com/bmdyy
 
 ## Skeleton Scripts
-|Purpose	| File|
+|Purpose|File|
 |     :---:      |     :---:      |
 |Basic skeleton script which makes an HTTP request in python|[main.py](/Skeleton%20Scripts/main.py)|
 | Run shell command and capture the output|[system_level_commands.py](/Skeleton%20Scripts/system_level_commands.py)| 
