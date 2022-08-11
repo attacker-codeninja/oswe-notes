@@ -17,11 +17,12 @@ Time for OSWE I guess.
 - [x] [CyberChef](https://gchq.github.io/CyberChef/) A web app for encryption, encoding, compression and data analysis
 - [x] [JSNICE](http://jsnice.org/) A JavaScript Deobfuscation tool
 - [x] [boxentriq/code-breaking](https://www.boxentriq.com/code-breaking) Various codebreaking and cipher tools
+- [x] [regex101](https://regex101.com/) / [Learn Regex](https://regexr.com/) Regex testers
 
 #### Decompilers
 
-- [x] [dnSPY](https://github.com/dnSpy/dnSpy) - .NET decompiler
-- [x] [JD-GUI](http://java-decompiler.github.io/) - Java decompiler
+- [x] [dnSPY](https://github.com/dnSpy/dnSpy) .NET decompiler
+- [x] [JD-GUI](http://java-decompiler.github.io/) Java decompiler
 
 ## Debuggers
 
@@ -37,6 +38,10 @@ Time for OSWE I guess.
 - Hot Code Replace: Allows us to modify the source file and push changes to the executing process.
 </p>
 </details>
+
+#### Remote Debugging
+
+TODO
 
 ## Source Code Analysis Methdology
 |S. No|Approach|
