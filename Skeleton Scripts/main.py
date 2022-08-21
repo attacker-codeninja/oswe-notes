@@ -1,40 +1,85 @@
-import requests, sys, re
-from bs4 import BeautifulSoup
+#!/usr/bin/python3
 
-session = requests.Session()
 
-def exploit_rce():
-    print ("(+) RCE: Reverse shell spawned....")
+import argparse
+import requests
+import sys
 
-def auth_bypass(target_ip):
-    """
-    url = 'http://%s/path' % target_ip
-    body = {'parameter1': 'value1',
-             'parameter2': 'value2'
-            }
 
-    session.get(target) #GET Request
-    session.post(url, data = body) #POST Request
+# Interface class to display terminal messages
+class Interface():
+    def __init__(self):
+        self.red = '\033[91m'
+        self.green = '\033[92m'
+        self.white = '\033[37m'
+        self.yellow = '\033[93m'
+        self.bold = '\033[1m'
+        self.end = '\033[0m'
 
-    #Parse response based on string match, check Skeleton Function/parse_response for more examples
-    s = BeautifulSoup(r.text, 'lxml')
-    authenticated_string = re.search("Welcome to dashboard", s.text)
-    if authenticated_string:
-        return "Authenticated"
-    return "Unable to authenticate"
-    """
+    def header(self):
+        print('\n    >> Advanced Web Attacks and Exploitation')
+        print('    >> Python Skeleton Script\n')
+
+    def info(self, message):
+        print(f"[{self.white}*{self.end}] {message}")
+
+    def warning(self, message):
+        print(f"[{self.yellow}!{self.end}] {message}")
+
+    def error(self, message):
+        print(f"[{self.red}x{self.end}] {message}")
+
+    def success(self, message):
+        print(f"[{self.green}✓{self.end}] {self.bold}{message}{self.end}")
+
+
+def sendGet(url, debug):
+    try:
+        if debug is True:
+            proxies = {'http': 'http://127.0.0.1:8080', 'https': 'http://127.0.0.1:8080'}
+            r = requests.get(url, proxies = proxies)
+        else:
+            r = requests.get(url)
+    except requests.exceptions.ProxyError:
+        output.error('Is your proxy running?')
+        sys.exit(-1)
+    return r
+
 
 def main():
-    if len(sys.argv) != 4:
-        print ("(+) usage: %s <target ip> <nc ip> <nc port>"  % sys.argv[0])
-        print ('(+) eg: %s 192.168.121.103'  % sys.argv[0])
-        sys.exit(-1)
+    # Parse Arguments
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-t', '--target', help='Target ip address or hostname', required=True)
+    parser.add_argument('-li', '--ipaddress', help='Listening IP address for reverse shell', required=False)
+    parser.add_argument('-lp', '--port', help='Listening port for reverse shell', required=False)
+    parser.add_argument('-u', '--username', help='Username to target', required=False)
+    parser.add_argument('-p', '--password', help='Password value to set', required=False)
+    parser.add_argument('-d', '--debug', help='Instruct our web requests to use our defined proxy', action='store_true', required=False)
+    args = parser.parse_args()
 
-    print ("(+) Auth Bypass: Exploiting XYZ vulnerability....")
-    auth_bypass(sys.argv[1])
+    # Instantiate our interface class
+    global output
+    output = Interface()
+
+    # Banner
+    output.header()
+
+    # Debugging
+    if args.debug:
+        for k,v in sorted(vars(args).items()):
+            if k == 'debug':
+                output.warning(f"Debugging Mode: {v}")
+            else:
+                output.info(f"{k}: {v}")
+
+    # Authentication Bypass
+    sendGet(f"http://{args.target}", args.debug)
+
+    # Remote Code Execution
+    sendGet(f"http://{args.target}", args.debug)
     
-    print ("(+) RCE: Exploiting XYZ vulnerability....")
-    exploit_rce()
-
-if __name__ == "__main__":
+    # Try Harder
+    output.success('Exploit has been successfully executed. :eyes: on your listener!')
+    
+if __name__ == '__main__':
     main()
