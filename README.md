@@ -119,12 +119,12 @@ Weak random token generator	| XXE - [Payloads](https://github.com/payloadbox/xxe
 ## Vulnerable Code Examples
 |Language - PHP|
 |---|
-|[XSS](/Vulnerable%20Code%20Examples/php/xss.php)|
-|[LFI](/Vulnerable%20Code%20Examples/php/lfi.php)|
-|[SSRF](/Vulnerable%20Code%20Examples/php/ssrf.php)|
-|[OS Command Injection](/Vulnerable%20Code%20Examples/php/commandInjection.php)|
-|[SQL Injection - Boolean](/Vulnerable%20Code%20Examples/php/sqlinjection/boolen.php)|
-|[SQL Injection - Error](/Vulnerable%20Code%20Examples/php/sqlinjection/error.php)|
+|[XSS](/vulnerable-code-examples/php/xss.php)|
+|[LFI](/vulnerable-code-examples/php/lfi.php)|
+|[SSRF](/vulnerable-code-examples/php/ssrf.php)|
+|[OS Command Injection](/vulnerable-code-examples/php/command-injection.php)|
+|[SQL Injection - Boolean](/vulnerable-code-examples/php/sql-injection/boolean.php)|
+|[SQL Injection - Error](/vulnerable-code-examples/php/sql-injection/error.php)|
 
 ## Code Review Checklist
 - [x] Identify the technology stack: 
@@ -162,9 +162,9 @@ Weak random token generator	| XXE - [Payloads](https://github.com/payloadbox/xxe
 ## Skeleton Scripts
 |Purpose|File|
 |---|---|
-|Basic skeleton script which makes an HTTP request in python|[main.py](/Skeleton%20Scripts/main.py)|
-| Run shell command and capture the output|[system_level_commands.py](/Skeleton%20Scripts/system_level_commands.py)| 
-| Run Java from within Python|[run_java_from_python.py](/Skeleton%20Scripts/run_java_from_python.py)| 
-| SQLI multi threaded python exploit|[MYSQL_Injection_multithread.py](/Skeleton%20Scripts/MYSQL_Injection_multithread.py)| 
-| Postgres SQLI to RCE JS session riding exploit|[Windows_RCE_XHR.js](/Skeleton%20Scripts/PostgreSQL%20Extension/Windows/Windows_RCE_XHR.js)| 
+|Basic skeleton script which makes an HTTP request in python|[main.py](/skeleton-scripts/main.py)|
+| Run shell command and capture the output|[system_level_commands.py](/skeleton-scripts/system_level_commands.py)| 
+| Run Java from within Python|[run_java_from_python.py](/skeleton-scripts/run_java_from_python.py)| 
+| SQLI multi threaded python exploit|[MYSQL_Injection_multithread.py](/skeleton-scripts/MYSQL_Injection_multithread.py)| 
+| Postgres SQLI to RCE JS session riding exploit|[Windows_RCE_XHR.js](/skeleton-scripts/PostgreSQL%20Extension/Windows/Windows_RCE_XHR.js)| 
 | XSS Steal cookie XHR|[steal_cookie_xhr.js](/Skeleton%20Scripts/XSS/steal_cookie_xhr.js)| 
