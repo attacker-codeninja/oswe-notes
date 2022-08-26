@@ -2,6 +2,17 @@
 
 ## Dangerous PHP Functions
 
+### Acquiring User Supplied Input
+```
+$_GET and $HTTP_GET_VARS          // parameter submitted in query string Ex: $_GET['username']
+$_POST and $HTTP_POST_VARS        // parameter submitted in request body string Ex: $_POST['username']
+$_COOKIE and $HTTP_COOKIE_VARS    // cookies submitted in the request Ex: $_COOKIE['name']
+$_REQUEST                         // contains all item the item in $_GET, $_POST and $_COOKIE
+$_FILES and $HTTP_POST_FILES      // contains file uploaded in the request
+$_SERVER['PHP_SELF']              // contains current executing page
+$_SESSION                         // store session value Ex: $_SESSION['username'] = $_POST['username']
+```
+
 ### Command Execution
 ```
 exec           - Returns last line of commands output
