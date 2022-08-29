@@ -33,7 +33,7 @@ class Interface():
         print(f"[{self.green}✓{self.end}] {self.bold}{message}{self.end}")
 
 
-def sendGet(url, debug):
+def send_get(url, debug):
     try:
         if debug is True:
             proxies = {'http': 'http://127.0.0.1:8080', 'https': 'http://127.0.0.1:8080'}
@@ -55,6 +55,7 @@ def main():
     parser.add_argument('-u', '--username', help='Username to target', required=False)
     parser.add_argument('-p', '--password', help='Password value to set', required=False)
     parser.add_argument('-d', '--debug', help='Instruct our web requests to use our defined proxy', action='store_true', required=False)
+    global args
     args = parser.parse_args()
 
     # Instantiate our interface class
@@ -73,10 +74,10 @@ def main():
                 output.info(f"{k}: {v}")
 
     # Authentication Bypass
-    sendGet(f"http://{args.target}", args.debug)
+    send_get(f"http://{args.target}", args.debug)
 
     # Remote Code Execution
-    sendGet(f"http://{args.target}", args.debug)
+    send_get(f"http://{args.target}", args.debug)
     
     # Try Harder
     output.success('Exploit has been successfully executed. :eyes: on your listener!')
