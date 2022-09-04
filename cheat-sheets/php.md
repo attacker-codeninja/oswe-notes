@@ -8,6 +8,10 @@ A typical method is abuse of the `display_errors` PHP setting. Leverage the `dis
 
 `GET /ATutor/browse.php?access=&search[]=test&include=all&filter=Filter HTTP/1.1`
 
+## Type Juggling
+
+
+
 ## Dangerous PHP Functions
 
 ### Acquiring User Supplied Input
