@@ -43,15 +43,6 @@ Time for OSWE I guess.
 
 TODO
 
-## Source Code Analysis Methdology
-|S. No|Approach|
-|---|---|
-|1|String matching/Grep for bugs|
-|2|Following user input|
-|3|Reading source code randomly|
-|4|Read all the code|
-|5|Check one functionality at a time (login, password reset...)|
-
 #### Source vs. Sink
 
 - A 'source' is the code that allows a vulnerability to happen, whereas a 'sink' is where the vulnerability actually happens.
@@ -125,36 +116,6 @@ Weak random token generator	| XXE - [Payloads](https://github.com/payloadbox/xxe
 |[OS Command Injection](/vulnerable-code-examples/php/command-injection.php)|
 |[SQL Injection - Boolean](/vulnerable-code-examples/php/sql-injection/boolean.php)|
 |[SQL Injection - Error](/vulnerable-code-examples/php/sql-injection/error.php)|
-
-## Code Review Checklist
-- [x] Identify the technology stack: 
-    - [x] Programming language? What version, i.e., PHP 5 or 7? Are there programming language-specific vulnerabilities to look out for?
-    - [x] Database? 
-    - [x] Framework?
-    - [x] Templating engine?
-    - [x] Is it MVC based?
-    - [x] What are the communication protocols, does it use websockets?
-    - [x] Does it have an API?
-    - [x] What Opertating System? find ubuntu version using lsb_release -a
-- [x] Map the app
-    - [x] Use `tree -L 3` command, open the app in `VSCode` or build a sitemap using `burp suite` to understand the application directory structure
-    - [x] What are the routes/pages? If java app search for `doPost` and `doGet`. In case of python find routes starting with `@`
-    - [x] Is the app MVC based? where are the `Models`, `Views` and `Controllers` located?
-- [x] Explore the app
-    - [x] Is the application running as root?
-    - [x] Which pages don't require authentication? You can prioritise testing them first
-    - [x] After checking unauthenticated areas, focus on areas of the application that are likely to receive less attention (i.e. authenticated portions of the application).
-    - [x] Investigate how sanitization of the user input is performed. Is it done using a trusted, open-source library, or is a custom solution in place?
-    - [x] MVC: Check if some logic breaks the MVC driven pattern, try to search for direct SQL queries within controller.
-    - [x] If the application uses a database, how are queries constructed? Does the application parameterize input or simply sanitize it?
-    - [x] Inspect the logic for account creation or password reset/recovery routines. Can the functionality be subverted?
-    - [x] Does the application interact with its operating system? If so, can we modify commands or inject new ones?
-- [x] Discover vulnerabilities
-    - [x] What are the interesting functionalities? Password reset, comment section visible to all users, search bar etc
-    - [x] SQLi: Find database queries using regex `^.*?query.*?select.*?`
-    - [x] SSTI: Find templating engine, you might have a similar line `app.set('view engine', 'pug');` in `app.js`
-    - [x] DOM based XSS: Grep for sinks. REF: https://domgo.at/cxss/sinks 
-    - [x] Weak random token generator: `java.util.random` is vulnerable
 
 ## OSWE-like Machines
 - https://docs.google.com/spreadsheets/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/edit#gid=665299979
