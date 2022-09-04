@@ -46,4 +46,4 @@
 
 - [x] What are the interesting functionalities that may lead to RCE? 
     - Upload/import functionality
-        - Zip jail escape?
+        - Zip jail escape via directory traversal?
