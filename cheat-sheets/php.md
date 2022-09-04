@@ -1,5 +1,13 @@
 # PHP
 
+## Tips
+
+### Disclosing the Web Root
+
+A typical method is abuse of the `display_errors` PHP setting. Leverage the `display_errors` misconfiguration is by sending a GET request with arrays injected as parameters, if the back-end code does not expect arrays as input data a warning error can be triggered.
+
+`GET /ATutor/browse.php?access=&search[]=test&include=all&filter=Filter HTTP/1.1`
+
 ## Dangerous PHP Functions
 
 ### Acquiring User Supplied Input
