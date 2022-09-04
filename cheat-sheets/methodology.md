@@ -47,3 +47,9 @@
 - [x] What are the interesting functionalities that may lead to RCE? 
     - Upload/import functionality
         - Zip jail escape via directory traversal?
+        - Useful file extensions:
+          ```
+          PHP: .php, .php2, .php3, .php4, .php5, .php6, .php7, .phps, .phps, .pht, .phtm, .phtml, .pgif, .shtml, .htaccess, .phar, .inc
+          ASP: .asp, .aspx, .config, .ashx, .asmx, .aspq, .axd, .cshtm, .cshtml, .rem, .soap, .vbhtm, .vbhtml, .asa, .cer, .shtml
+          JSP: .jsp, .jspx, .jsw, .jsv, .jspf, .wss, .do, .action
+          ```
