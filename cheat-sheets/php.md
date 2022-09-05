@@ -10,6 +10,25 @@ A typical method is abuse of the `display_errors` PHP setting. Leverage the `dis
 
 ## Type Juggling
 
+Types:
+- "string" for strings
+- int(0), float(0) for numbers
+- TRUE, FALSE for booleans
+
+Terms:
+- "Zero-like" - an expression that PHP will loosely compare to
+int(0)
+
+- PHP Has two main comparison modes, lets call them **loose** (`==`) and **strict** (`===`).
+- Loose comparisons have a set of operand conversion rules to make it easier for developers.
+- Some of these are a bit weird.
+
+#### PHP Comparisons: Strict
+
+
+
+#### PHP Comparisons: Loose
+
 
 
 ## Dangerous PHP Functions
