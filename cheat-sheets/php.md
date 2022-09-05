@@ -98,15 +98,19 @@ var_dump(sha1('aaO8zKZF') == sha1('aa3OFF9m'));
 
 When a string is evaluated in a numeric context, the resulting value and type are determined as follows:
 - If the string does not contain any of the characters `.`, `e`, or `E` and the numeric value fits into integer type limits (as defined by `PHP_INT_MAX`), the string will be evaluated as an integer. In all other cases it will be evaluated as a float.
-- The value is given by the initial portion of the string. If the string starts with valid numeric data, this will be the value used. Otherwise, the value will be 0 (zero). Valid numeric data is an optional sign, followed by one or more digits (optionally containing a decimal point), followed by an optional exponent. The exponent is an `e` or `E` followed by one or more digits.
+- The value is given by the initial portion of the string. If the string starts with valid numeric data, this will be the value used. Otherwise, the value will be 0 (zero). 
+- Valid numeric data is an optional sign, followed by one or more digits (optionally containing a decimal point), followed by an optional exponent. The exponent is an `e` or `E` followed by one or more digits.
 
 When loose comparing a **string to a number**, PHP will attempt to convert the string to a number then perform a numeric comparison:
+
+> Note: PHP 7 will only cast strings to numeric data where the string is considered valid numeric data. PHP 5 is looser and does not require valid numeric data.
+
 ```
-TRUE: "0000" == int(0)
-TRUE: "0e12" == int(0)
-TRUE: "1abc" == int(1)
-TRUE: "0abc" == int(0)
-TRUE: "abc" == int(0) // !!
+TRUE: "0000" == int(0)    # true PHP 5.0 / true PHP 7.0
+TRUE: "0e12" == int(0)    # true PHP 5.0 / true PHP 7.0
+TRUE: "1abc" == int(1)    # true PHP 5.0 / false PHP 7.0
+TRUE: "0abc" == int(0)    # true PHP 5.0 / false PHP 7.0
+TRUE: "abc" == int(0)     // !!
 ```
 
 If PHP decides that both operands look like numbers, even if they are actually strings, it will convert them both and perform a numeric comparison:
@@ -120,7 +124,7 @@ TRUE: "0xF" == "15"
 > Note: Interpretation rules for exponent notations have not changed in PHP 7
 
 ```
-var_dump('0eAAAA' == '0'); # false PHP 5.0 / false PHP 7.0
+var_dump('0eAAAA' == '0'); # false PHP 5.0 / false PHP 7.0 - Not valid numeric data as per logic rules outlined above, therefore no string to number conversion is performed
 var_dump('0e1111' == '0'); # true PHP 5.0 / true PHP 7.0
 var_dump('0e9999' == 0);   # true PHP 5.0 / true PHP 7.0
 ```
