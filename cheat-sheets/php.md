@@ -16,20 +16,31 @@ Types:
 - TRUE, FALSE for booleans
 
 Terms:
-- "Zero-like" - an expression that PHP will loosely compare to
-int(0)
+- "Zero-like" - an expression that PHP will loosely compare to int(0)
 
-- PHP Has two main comparison modes, lets call them **loose** (`==`) and **strict** (`===`).
-- Loose comparisons have a set of operand conversion rules to make it easier for developers.
-- Some of these are a bit weird.
+Background:
+- PHP Has two main comparison modes, lets call them **loose** (`==`) and **strict** (`===`)
+- Loose comparisons have a set of operand conversion rules to make it easier for developers
+- Some of them are a bit weird
 
 #### PHP Comparisons: Strict
 
-
+![Strict Comparison Chart](https://raw.githubusercontent.com/tkashro/oswe-notes/master/img/php-strict-comparisons.png)
 
 #### PHP Comparisons: Loose
 
+![Loose Comparison Chart](https://raw.githubusercontent.com/tkashro/oswe-notes/master/img/php-loose-comparisons.png)
 
+#### The Logic
+
+When loose comparing a **string to a number**, PHP will attempt to convert the string to a number then perform a numeric comparison:
+```
+TRUE: "0000" == int(0)
+TRUE: "0e12" == int(0)
+TRUE: "1abc" == int(1)
+TRUE: "0abc" == int(0)
+TRUE: "abc" == int(0) // !!
+```
 
 ## Dangerous PHP Functions
 
