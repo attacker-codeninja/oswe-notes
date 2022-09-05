@@ -22,6 +22,65 @@ Background:
 - PHP Has two main comparison modes, lets call them **loose** (`==`) and **strict** (`===`)
 - Loose comparisons have a set of operand conversion rules to make it easier for developers
 - Some of them are a bit weird
+- Type juggling oddities have been improved in PHP 7 and again in PHP 8, these types of problems are more common in <= PHP 5
+
+> PHP8 won't try to cast string into numbers anymore, thanks to the Saner string to number comparisons RFC, meaning that collision with hashes starting with 0e and the likes are finally a thing of the past! The Consistent type errors for internal functions RFC will prevent things like `0 == strcmp($_GET['username'], $password)` bypasses, since strcmp won't return null and spit a warning any longer, but will throw a proper exception instead. 
+
+#### True statements
+
+```php
+var_dump('0010e2'   == '1e3');           # true
+var_dump('0xABCdef' == ' 0xABCdef');     # true PHP 5.0 / false PHP 7.0
+var_dump('0xABCdef' == '     0xABCdef'); # true PHP 5.0 / false PHP 7.0
+var_dump('0x01'     == 1)                # true PHP 5.0 / false PHP 7.0
+var_dump('0x1234Ab' == '1193131');
+```
+
+```php
+'123'  == 123
+'123a' == 123
+'abc'  == 0
+```
+
+```php
+'' == 0 == false == NULL
+'' == 0       # true
+0  == false   # true
+false == NULL # true
+NULL == ''    # true
+```
+
+#### NULL statements
+
+```php
+var_dump(sha1([])); # NULL
+var_dump(md5([]));  # NULL
+```
+
+#### Magic Hashes - Exploit
+
+If the hash computed starts with "0e" (or "0..0e") only followed by numbers, PHP will treat the hash as a float.
+
+| Hash | “Magic” Number / String    | Magic Hash                                    |
+| ---- | -------------------------- |:---------------------------------------------:|
+| MD5  | 240610708                  | 0e462097431906509019562988736854              |
+| MD5  | QNKCDZO                    | 0e830400451993494058024219903391              |
+| MD5  | 0e1137126905               | 0e291659922323405260514745084877              |
+| MD5  | 0e215962017                | 0e291242476940776845150308577824              |
+| MD5  | 129581926211651571912466741651878684928                | 06da5430449f8f6f23dfc1276f722738              |
+| SHA1 | 10932435112                | 0e07766915004133176347055865026311692244      |
+| SHA-224 | 10885164793773          | 0e281250946775200129471613219196999537878926740638594636 |
+| SHA-256 | 34250003024812          | 0e46289032038065916139621039085883773413820991920706299695051332 |
+| SHA-256 | TyNOQHUS                | 0e66298694359207596086558843543959518835691168370379069085300385 |
+
+```php
+<?php
+var_dump(md5('240610708') == md5('QNKCDZO')); # bool(true)
+var_dump(md5('aabg7XSs')  == md5('aabC9RqS'));
+var_dump(sha1('aaroZmOk') == sha1('aaK1STfY'));
+var_dump(sha1('aaO8zKZF') == sha1('aa3OFF9m'));
+?>
+```
 
 #### PHP Comparisons: Strict
 
@@ -32,6 +91,10 @@ Background:
 ![Loose Comparison Chart](https://raw.githubusercontent.com/tkashro/oswe-notes/master/img/php-loose-comparisons.png)
 
 #### The Logic
+
+When a string is evaluated in a numeric context, the resulting value and type are determined as follows:
+- If the string does not contain any of the characters `.`, `e`, or `E` and the numeric value fits into integer type limits (as defined by `PHP_INT_MAX`), the string will be evaluated as an integer. In all other cases it will be evaluated as a float.
+- The value is given by the initial portion of the string. If the string starts with valid numeric data, this will be the value used. Otherwise, the value will be 0 (zero). Valid numeric data is an optional sign, followed by one or more digits (optionally containing a decimal point), followed by an optional exponent. The exponent is an `e` or `E` followed by one or more digits.
 
 When loose comparing a **string to a number**, PHP will attempt to convert the string to a number then perform a numeric comparison:
 ```
