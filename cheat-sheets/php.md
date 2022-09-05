@@ -104,6 +104,7 @@ When a string is evaluated in a numeric context, the resulting value and type ar
 When loose comparing a **string to a number**, PHP will attempt to convert the string to a number then perform a numeric comparison:
 
 > Note: PHP 7 will only cast strings to numeric data where the string is considered valid numeric data. PHP 5 is looser and does not require valid numeric data.
+> Hexadecimal strings are no longer considered numeric in PHP 7 (https://www.php.net/manual/en/migration70.incompatible.php#migration70.incompatible.strings).
 
 ```
 TRUE: "0000" == int(0)    # true PHP 5.0 / true PHP 7.0
