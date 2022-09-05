@@ -117,6 +117,14 @@ TRUE: "0e12345" == "0"
 TRUE: "0xF" == "15"
 ```
 
+> Note: Interpretation rules for exponent notations have not changed in PHP 7
+
+```
+var_dump('0eAAAA' == '0'); # false PHP 5.0 / false PHP 7.0
+var_dump('0e1111' == '0'); # true PHP 5.0 / true PHP 7.0
+var_dump('0e9999' == 0);   # true PHP 5.0 / true PHP 7.0
+```
+
 ## Dangerous PHP Functions
 
 ### Acquiring User Supplied Input
