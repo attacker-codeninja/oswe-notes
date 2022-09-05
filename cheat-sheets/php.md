@@ -33,7 +33,11 @@ var_dump('0010e2'   == '1e3');           # true
 var_dump('0xABCdef' == ' 0xABCdef');     # true PHP 5.0 / false PHP 7.0
 var_dump('0xABCdef' == '     0xABCdef'); # true PHP 5.0 / false PHP 7.0
 var_dump('0x01'     == 1)                # true PHP 5.0 / false PHP 7.0
-var_dump('0x1234Ab' == '1193131');
+
+var_dump('0xAAAA'   == '43690');           # true PHP 5.0 / false PHP 7.0
+var_dump('0xAAAA'   == 43690);             # true PHP 5.0 / false PHP 7.0
+var_dump(0xAAAA     == 43690);             # true PHP 5.0 / true PHP 7.0
+var_dump('0xAAAA'   == '43691');           # false PHP 5.0 / false PHP 7.0
 ```
 
 ```php
