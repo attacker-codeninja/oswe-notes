@@ -42,6 +42,14 @@ TRUE: "0abc" == int(0)
 TRUE: "abc" == int(0) // !!
 ```
 
+If PHP decides that both operands look like numbers, even if they are actually strings, it will convert them both and perform a numeric comparison:
+```
+TRUE: "0e12345" == "0e54321"
+TRUE: "0e12345" <= "1"
+TRUE: "0e12345" == "0"
+TRUE: "0xF" == "15"
+```
+
 ## Dangerous PHP Functions
 
 ### Acquiring User Supplied Input
