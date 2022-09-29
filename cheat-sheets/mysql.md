@@ -1,6 +1,6 @@
 # MySQL
 
-#### Quoted String Bypass
+### Quoted String Bypass
 
 ASCII characters in their hexadecimal representation are automatically decoded by the MySQL engine:
 
