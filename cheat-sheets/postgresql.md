@@ -2,6 +2,10 @@
 
 String manipulation functions: https://www.postgresql.org/docs/14/functions-string.html
 
+### Checklist
+
+- [x] Check if user is DBA: `SELECT current_setting('is_superuser'); //'on' or 'off'`
+
 ### Quoted String Bypass
 
 **Piping**
