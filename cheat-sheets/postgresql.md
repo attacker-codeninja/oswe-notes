@@ -1,6 +1,7 @@
 # PostgreSQL
 
-String manipulation functions: https://www.postgresql.org/docs/14/functions-string.html
+- String manipulation functions: https://www.postgresql.org/docs/14/functions-string.html
+- Postgres SQL-injection attacks allow an attacker to perform **stacked queries**. This means that we can use a query terminator character in our payload (;), and inject a completely new query into the original vulnerable query string. This makes exploitation much easier since neither the injection point nor the payload are limited by the nature of the vulnerable query.
 
 ### Checklist
 
