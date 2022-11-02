@@ -127,5 +127,5 @@ Weak random token generator	| XXE - [Payloads](https://github.com/payloadbox/xxe
 | Run shell command and capture the output|[system_level_commands.py](/skeleton-scripts/system_level_commands.py)| 
 | Run Java from within Python|[run_java_from_python.py](/skeleton-scripts/run_java_from_python.py)| 
 | SQLI multi threaded python exploit|[MYSQL_Injection_multithread.py](/skeleton-scripts/MYSQL_Injection_multithread.py)| 
-| Postgres SQLI to RCE JS session riding exploit|[Windows_RCE_XHR.js](/skeleton-scripts/PostgreSQL%20Extension/Windows/Windows_RCE_XHR.js)| 
+| Postgres SQLI to RCE JS session riding exploit|[Windows_RCE_XHR.js](/skeleton-scripts/PostgreSQL%20Extensions/Windows/Windows_RCE_XHR.js)| 
 | XSS Steal cookie XHR|[steal_cookie_xhr.js](/skeleton-scripts/XSS/steal_cookie_xhr.js)| 
