@@ -258,3 +258,5 @@ amdb=# \lo_list
 ----+-------+-------------
 (0 rows)
 ```
+
+> See [here](/skeleton-scripts/PostgreSQL%20Extensions/postgresql_large_object_reverse_shell.py) for a UDF large object reverse shell PoC.
