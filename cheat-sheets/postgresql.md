@@ -259,4 +259,14 @@ amdb=# \lo_list
 (0 rows)
 ```
 
+### UDF Large Object to Reverse Shell
+
+1. Create a DLL file that will contain our malicious code
+2. Inject a query that creates a large object from an arbitrary remote file on disk
+3. Inject a query that updates page 0 of the newly created large object with the first 2KB of our DLL
+4. Inject queries that insert additional pages into the pg_largeobject table to contain the remainder of our DLL
+5. Inject a query that exports our large object (DLL) onto the remote server file system
+6. Inject a query that creates a PostgreSQL User Defined Function (UDF) based on our exported DLL
+7. Inject a query that executes our newly created UDF
+
 > See [here](/skeleton-scripts/PostgreSQL%20Extensions/postgresql_large_object_reverse_shell.py) for a UDF large object reverse shell PoC.
