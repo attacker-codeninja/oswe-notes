@@ -1,3 +1,6 @@
+## Notes
+- JavaScript strings can be natively hex-encoded e.g. `"\\\\x2fbin\\\\x2fbash"` - useful for string/regex bypass
+
 ## Dangerous Functions
 
 ```
