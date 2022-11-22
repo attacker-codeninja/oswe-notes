@@ -8,7 +8,7 @@
 ```js
 /* RCE */
 eval()                  //evaluate string as a javascript code
-safe-eval()             //same as eval, but more secure.
+safe-eval()             //same as eval, but more secure however sandbox escape exists (NSP 337, CVE-2017-16088)
 setTimeout(string, 2)
 setInterval(string)
 Function(string)
