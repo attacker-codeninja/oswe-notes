@@ -8,6 +8,16 @@ Time for OSWE I guess.
 
 [Fundamentals](#fundamentals)
 
+[Methodology](/cheat-sheets/methodology)
+
+[MySQL](/cheat-sheets/mysql)
+
+[PHP](/cheat-sheets/php)
+
+[PostgreSQL](/cheat-sheets/postgresql)
+
+[SQL Injection](/cheat-sheets/sql-injection)
+
 # Fundamentals
 
 ## Tools
