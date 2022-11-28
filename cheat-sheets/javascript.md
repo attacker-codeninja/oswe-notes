@@ -32,3 +32,7 @@ sh.stderr.pipe(client);});
 ### Escaping NodeJS VM (sandbox)
 
 - Escaping NodeJS VM or `safe-eval` is possible, see - and [escape.js](/vulnerable-code-examples/js/escape.js) for PoC
+
+Other useful resources for understanging the JavaScript sandbox workings:
+- https://www.wispwisp.com/index.php/2019/08/16/cve-2017-16088-poc/
+- https://odino.org/eval-no-more-understanding-vm-vm2-nodejs/
