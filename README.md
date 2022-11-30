@@ -31,7 +31,7 @@ Time for OSWE I guess.
 
 #### Decompilers
 
-- [x] [dnSPY](https://github.com/dnSpy/dnSpy) .NET decompiler
+- [x] [dnSPY](https://github.com/dnSpy/dnSpy) .NET decompiler/debugger
 - [x] [JD-GUI](http://java-decompiler.github.io/) Java decompiler
 
 ## Debuggers
