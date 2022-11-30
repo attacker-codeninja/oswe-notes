@@ -53,6 +53,8 @@ Time for OSWE I guess.
 
 TODO
 
+## Methodology
+
 #### Source vs. Sink
 
 - A 'source' is the code that allows a vulnerability to happen, whereas a 'sink' is where the vulnerability actually happens.
