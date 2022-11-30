@@ -16,6 +16,8 @@ Time for OSWE I guess.
 
 [PostgreSQL](/cheat-sheets/postgresql.md)
 
+[Serialization](/cheat-sheets/serialization.md)
+
 [SQL Injection](/cheat-sheets/sql-injection.md)
 
 # Fundamentals
