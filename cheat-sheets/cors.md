@@ -21,7 +21,7 @@ The following table shows how the same-origin policy will be applied in `http://
 
 ### `Access-Control-Allow-Origin` Header
 
-The specification of `Access-Control-Allow-Origin` allows for **multiple origins**, or the value **`null`**, or the wildcard **`*`**. However, **no browser supports multiple origins** and there are **restrictions** on the use of the **wildcard** `*`.(_The wildcard can only be used alone, this will fail `Access-Control-Allow-Origin: https://*.normal-website.com` and it cannot be used with_ _Access-Control-Allow-Credentials: true_)
+The specification of `Access-Control-Allow-Origin` allows for **multiple origins**, or the value **`null`**, or the wildcard **`*`**. However, **no browser supports multiple origins** and there are **restrictions** on the use of the **wildcard** `*`. (_The wildcard can only be used alone, this will fail `Access-Control-Allow-Origin: https://*.normal-website.com` and it cannot be used with_ _Access-Control-Allow-Credentials: true_). This means that if `Access-Control-Allow-Origin` is set to **`*`**, _Access-Control-Allow-Credentials_ is automatically set to **`false`**.
 
 This header is **returned by a server** when a website requests a cross-domain resource, with an `Origin` header added by the browser.
 
