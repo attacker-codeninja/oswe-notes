@@ -270,11 +270,7 @@ Proxying is kinda like “passing on" your request, exactly as you sent it. We c
 
 ### Iframe + Popup Bypass
 
-You can **bypass CORS checks** such as `e.origin === window.origin` by **creating an iframe** and **from it opening a new window**. More information in the following page:
-
-{% content-ref url="xss-cross-site-scripting/iframes-in-xss-and-csp.md" %}
-[iframes-in-xss-and-csp.md](xss-cross-site-scripting/iframes-in-xss-and-csp.md)
-{% endcontent-ref %}
+You can **bypass CORS checks** such as `e.origin === window.origin` by **creating an iframe** and **from it opening a new window**.
 
 ### DNS Rebinding via TTL
 
