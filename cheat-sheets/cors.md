@@ -66,15 +66,11 @@ Under certain circumstances, when a cross-domain request:
 * includes new **headers**
 * includes special **Content-Type header value**
 
-{% hint style="info" %}
-**Check** [**in this link**](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#simple\_requests) **the conditions of a request to avoid sending of a pre-flight request**
-{% endhint %}
+> **Check** [**in this link**](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#simple\_requests) **the conditions of a request to avoid sending of a pre-flight request**
 
 the cross-origin request is preceded by a **request** using the **`OPTIONS`** **method**, and the CORS protocol necessitates an initial check on what **methods and headers are permitted prior to allowing the cross-origin request**. This is called the **pre-flight check**. The server **returns a list of allowed methods** in addition to the **trusted origin** and the browser checks to see if the requesting website's method is allowed.
 
-{% hint style="danger" %}
-Note that **even if a pre-flight request isn't sent** because the "regular request" conditions are respected, the **response needs to have the authorization headers** or the **browser** **won't be able to read the response** of the request.
-{% endhint %}
+> Note that **even if a pre-flight request isn't sent** because the "regular request" conditions are respected, the **response needs to have the authorization headers** or the **browser** **won't be able to read the response** of the request.
 
 For **example**, this is a pre-flight request that is seeking to **use the `PUT` method** together with a **custom** request **header** called `Special-Request-Header`:
 
@@ -105,8 +101,6 @@ Access-Control-Max-Age: 240
 * `Access-Control-Request-Headers` The header the cross-origin request wants to send
 * `Access-Control-Request-Method` The method the cross-origin request wants to use
 * `Origin` Origin of the cross-origin request (Set automatically by the browser)
-
-![](../.gitbook/assets/preflight.svg)
 
 Note that usually (depending on the content-type and headers set) in a **GET/POST request no pre-flight request is sent** (the request is sent **directly**), but if you want to access the **headers/body of the response**, it must contains an _Access-Control-Allow-Origin_ header allowing it.\
 **Therefore, CORS doesn't protect against CSRF (but it can be helpful).**
@@ -185,8 +179,6 @@ The `_` character (in subdomains) is not only supported in Safari, but also in C
 
 **For more information and settings of this bypass check:** [**https://www.corben.io/advanced-cors-techniques/**](https://www.corben.io/advanced-cors-techniques/) **and** [**https://medium.com/bugbountywriteup/think-outside-the-scope-advanced-cors-exploitation-techniques-dad019c68397**](https://medium.com/bugbountywriteup/think-outside-the-scope-advanced-cors-exploitation-techniques-dad019c68397)
 
-![](<../.gitbook/assets/image (153).png>)
-
 ### From XSS inside a subdomain
 
 One defensive mechanism developers use against CORS exploitation is to white-list domains that frequently requests access for information. However, this isn’t entirely secure, because if even **one** of the subdomains of the **whitelisted** domain is **vulnerable** to other exploits such as **XSS**, it can enable CORS exploitation.
@@ -257,11 +249,7 @@ XSSI designates a kind of vulnerability which exploits the fact that, when a res
 
 This is especially interesting when it comes to dynamic JavaScript or JSONP when so-called ambient-authority information like cookies are used for authentication. The cookies are included when requesting a resource from a different host. BurpSuite plugin: [https://github.com/kapytein/jsonp](https://github.com/kapytein/jsonp)
 
-[**Read more about the difefrent types of XSSI and how to exploit them here.**](xssi-cross-site-script-inclusion.md)
-
 Try to add a **`callback`** **parameter** in the request. Maybe the page was prepared to send the data as JSONP. In that case the page will send back the data with `Content-Type: application/javascript` which will bypass the CORS policy.
-
-![](<../.gitbook/assets/image (229).png>)
 
 ### Easy (useless?) bypass
 
@@ -290,8 +278,6 @@ You can **bypass CORS checks** such as `e.origin === window.origin` by **creatin
 
 ### DNS Rebinding via TTL
 
-![](<../.gitbook/assets/image (108).png>)
-
 Basically you make the **victim access your page**, then you change the **DNS of your domain (the IP)** and make it **points** to your **victims web page**. You make your **victim execute** (**JS**) something when the **TTL is** **over** so a new DNS request will be made and then you will be able to gather the information (as you will always maintains **the user in your domain**, he won't send **any cookie** to the victim server, so this options **abuses the special privileges of the IP of the victim**).
 
 Even if you set the **TTL very low** (0 or 1) **browsers have a cache** that will **prevent** you from **abusing** this for several seconds/minuted.
@@ -317,8 +303,6 @@ You can have a service worker that will **flood the DNS cache to force a second 
 2. Service worker floods DNS cache (the cached attacker server name is deleted)
 3. Second DNS request this time responded with 127.0.0.1
 
-![](<../.gitbook/assets/image (375) (1).png>)
-
 _Blue is the first DNS request and orange is the flood._
 
 ### DNS Rebinding via **Cache**
@@ -330,15 +314,6 @@ You can **create 2 A records** (or **1 with 2 IPs**, depending on the provider) 
 Now, if the **browser** decides to **use** the **attacker IP address first**, the **attacker** will be able to **serve** the **payload** that will **perform HTTP requests** to the same **domain**. However, now that the attacker knows the IP of the victim, **he will stop answering the victim browser**.
 
 When the browser finds that the **domain isn't responding** to him, it will **use the second given IP**, so he will **access a different place bypassing SOP**. The attacker can abuse that to **get the information and exfiltrate it**.
-
-{% hint style="warning" %}
-Note that in order to access localhost you should try to rebind 127.0.0.1 in Windows and 0.0.0.0 in linux.\
-Providers such as godaddy or cloudflare didn't allow me to use the ip 0.0.0.0, but AWS route53 allowed me to create one A record with 2 IPs being one of them "0.0.0.0"
-
-<img src="../.gitbook/assets/image (638) (2) (1) (1) (1).png" alt="" data-size="original">
-{% endhint %}
-
-![](<../.gitbook/assets/image (620) (4).png>)
 
 For more info you can check [https://unit42.paloaltonetworks.com/dns-rebinding/](https://unit42.paloaltonetworks.com/dns-rebinding/)
 
