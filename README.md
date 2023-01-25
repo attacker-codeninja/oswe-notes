@@ -113,7 +113,7 @@ Modify the following values on my.cnf file (Typically located at /etc/mysql/my.c
 |---|---|
 |SQL Injection - [Payloads](https://portswigger.net/web-security/sql-injection/cheat-sheet)| Deserialization|
 |Persistent Cross-Site Scripting	| Bypassing File Upload Restrictions|
-IDOR	|SQL Injection RCE (Postgres UDF or Mysql copy to function)|
+IDOR	|SQL Injection RCE (Postgres UDF or MySQL COPY TO function)|
 Weak random token generator	| XXE - [Payloads](https://github.com/payloadbox/xxe-injection-payload-list)|
 |Type Juggling	| XML Injection|
 |Cross-Site Request Forgery	- [Payloads](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/CSRF%20Injection/README.md#html-get---no-user-interaction)| SSTI - [Payloads](https://book.hacktricks.xyz/pentesting-web/ssti-server-side-template-injection)|
