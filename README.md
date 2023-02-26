@@ -38,22 +38,31 @@ Time for OSWE I guess.
 
 ## Debuggers
 
-<details><summary>Debugging Context Controls</summary>
+<details><summary>Remote Debugging</summary>
 <p>
 
-- Continue: Application will resume execution until it completes or hits another breakpoint.
-- Step Over: Allows the next method call to execute and will pause execution at the next line in the current method.
-- Step Into: Step Into steps into the most deeply nested function. For example, if you use Step Into on a call like Func1(Func2()), the debugger steps into the function Func2.
-- Step Out: Continues running code and suspends execution when the current function returns. The debugger skips through the current function.
-- Restart: 
-- Stop: 
-- Hot Code Replace: Allows us to modify the source file and push changes to the executing process.
+1. **Install Visual Studio Code**: Visit https://code.visualstudio.com/docs/?dv=linux64_deb. Be sure to install any necessary extensions relating to the language you will be debugging.
+2. **Configure the remote application to debug**: Specific instructions on how to configure remote debugging differs per application/framework. Refer to the documentation for the application you are debugging. Generally, the remote application will need to be restarted in such a way that it will wait for a debugging connection on a certain port, once you arrive at this point, continue with the next steps.
+3. **Load the code into Visual Studio Code**: Transfer the entire source code to your local debugging machine, use `rsync` or `scp`. Once transferred open the folder in Visual Studio Code.
+4. **Configure Visual Studio Code to connect to the remote debugger**: Now that the dependencies are running, the code base is open in Visual Studio Code, and the web application is awaiting a debugging connection, it's time to connect to the remote debugger. The next step is to configure the connection information in Visual Studio Code for remote debugging. You will need to set the remote IP, port, and remoteRoot according to the remote web application.
+5. Run the application and test the remote debugging.
 </p>
 </details>
 
-#### Remote Debugging
+---
 
-TODO
+<details><summary>Debugging Context Controls</summary>
+<p>
+
+- **Continue**: Application will resume execution until it completes or hits another breakpoint.
+- **Step Over**: Allows the next method call to execute and will pause execution at the next line in the current method.
+- **Step Into**: Step Into steps into the most deeply nested function. For example, if you use Step Into on a call like Func1(Func2()), the debugger steps into the function Func2.
+- **Step Out**: Continues running code and suspends execution when the current function returns. The debugger skips through the current function.
+- **Restart**: 
+- **Stop**: 
+- **Hot Code Replace**: Allows us to modify the source file and push changes to the executing process.
+</p>
+</details>
 
 ## Methodology
 
