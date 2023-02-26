@@ -8,6 +8,8 @@ Time for OSWE I guess.
 
 [Fundamentals](#fundamentals)
 
+[Cross-Origin Resource Sharing (CORS)](/cheat-sheets/cors.md)
+
 [Methodology](/cheat-sheets/methodology.md)
 
 [MySQL](/cheat-sheets/mysql.md)
